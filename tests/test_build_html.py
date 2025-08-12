@@ -1,15 +1,31 @@
 import unittest
-# from lib.build_html import BuildHtml
+from lib.build_html import BuildHtml
 # from bs4 import BeautifulSoup
+from tests.html_example import HTML_EXAMPLE
+from lib.xlsx import Xlsx
+from lib.helpers.group_elements_by_two import group_elements_by_two
 
 
 class TestBuildHtml(unittest.TestCase):
-    pass
-    # def test_building(self):
-        # keyword = 'some keyword'
-        # html_body = ''
+    def test_building(self):
+
+        rows = Xlsx('sources/keywords.xlsx').data_rows()
+
+        # for i,row in enumerate(rows):
+            # print(i)
+            # print(row)
+
+        keywords_list = []
+
+        for row in rows:
+            grouped = group_elements_by_two(row)
+            # print(grouped)
+            keywords_list.append(grouped)
         
-        # html_code = BuildHtml(html_body, keyword).perform()
+        
+        
+        
+        html_code = BuildHtml(html_body=HTML_EXAMPLE, keywords=keywords_list).perform()
 
         # bs = BeautifulSoup(html_code, 'html.parser')
 

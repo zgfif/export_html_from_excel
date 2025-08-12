@@ -4,7 +4,7 @@ def group_elements_by_two(lst: list) -> list:
     paired_lst = []
 
     if len(lst) % 2 != 0:
-        raise ValueError('The list must has paired count: 2, 4, 6, ...')
+        raise ValueError('The list must has even count of elements.')
 
     for i in range(len(lst) - 1):
         if i % 2 == 0:
