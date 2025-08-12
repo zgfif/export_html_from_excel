@@ -1,3 +1,8 @@
+### Excel to HTML converter
+
+This app is used to extract html-code from Excel sheet file and create corresponding html files. Also, it replaces links extracted from another Excel file.
+
+
 ## Prerequisits:
 
 - Installed __python__ (actual verion);
@@ -26,5 +31,5 @@ and finally:
 
 ## Tests:
 
-`` python -m unittest discover tests/ ```
+`` python -m unittest discover tests/ ``
 
