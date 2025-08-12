@@ -1,10 +1,13 @@
 class BuildHtml:
+    """This class is used to find all keywords and replace them with values from sources/keywords.xlsx"""
+    
     def __init__(self, html_body: str, keywords: list[list[str, str]]) -> None:
-        self._html_body = html_body
-        self._keywords = keywords
+        self._html_body = html_body # html code to perform replacing
+        self._keywords = keywords # contains the list [[key1, value1], [key2, value2],...[keyN,valueN]]
 
 
     def perform(self) -> str:
+        """Replaces all found keywords with values from 'sources/keywords.xlsx'"""
         if not self._keywords:
             return self._html_body
         
