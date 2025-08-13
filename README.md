@@ -1,35 +1,45 @@
-### Excel to HTML converter
+# Excel to HTML Converter
 
-This app is used to extract html-code from Excel sheet file and create corresponding html files. Also, it replaces links extracted from another Excel file.
+This app extracts HTML code from an Excel sheet and creates corresponding HTML files.  
+It can also replace links extracted from another Excel file.
 
+## Prerequisites
 
-## Prerequisits:
-
-- Installed __python__ (actual verion);
-
-- Installed __venv__ package for work with Virtual Environments;
-
-- Installed __pip__ package for installing required packages.
+- Installed **Python** (latest stable version recommended)
+- Installed **venv** module (for creating virtual environments)
+- Installed **pip** (for installing dependencies)
 
 
-## Steps to reproduce:
-Install package for virtual environment:
+## Installation and Usage
 
-`` python -m venv .venv``
+1. Create a virtual environment:
+```bash
+python -m venv .venv
+```
 
-then activate virtual environment (this command for Linux, for Mac OS and Windows will be other):
+2. Activate the virtual environment:
+   
+on Linux/macOS:
+```bash 
+source .venv/bin/activate 
+```   
+on Windows:
+```powershell
+.venv\Scripts\Activate.ps1
+```
 
-`` source .venv/bin/activate `` 
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-then intall all required packages:
+4. Run the application:
+```bash 
+python main.py
+```
 
-`` pip install -r requirements.txt ``
-
-and finally:
-
-`` python main.py ``
-
-## Tests:
-
-`` python -m unittest discover tests/ ``
+## Running Tests
+```bash
+python -m unittest discover tests/
+```
 
