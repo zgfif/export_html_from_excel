@@ -1,0 +1,11 @@
+Summary
+
+I need a small program programmed with Python, to export html pages from the Excel file
+there are two columns in Excel: url and html. The exported webpage should be named 
+with "column:url", and the page content is "column:html". Attached you will find the 
+Excel sample, and 1 exported page sample. Finally, the program will get me 10 webpages totally.
+But if there is 1000 rows in the excel, I will get 999 webpages, the first row will 
+be ignored. There is also a file named keyword.xlsx， the same keyword in the webpage will be 
+replaced with the link in the keyword.xlsx
+
+1.html

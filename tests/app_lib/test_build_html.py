@@ -1,9 +1,11 @@
 import unittest
-from lib.build_html import BuildHtml
+from app_lib.build_html import BuildHtml
 # from bs4 import BeautifulSoup
-from tests.html_example import HTML_EXAMPLE
-from lib.xlsx import Xlsx
-from lib.helpers.group_elements_by_two import group_elements_by_two
+from tests.app_lib.html_example import HTML_EXAMPLE
+from app_lib.xlsx import Xlsx
+from app_lib.helpers.group_elements_by_two import group_elements_by_two
+
+
 
 
 class TestBuildHtml(unittest.TestCase):
