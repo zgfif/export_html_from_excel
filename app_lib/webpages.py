@@ -47,4 +47,3 @@ class Webpages:
             raise ValueError(f'Output directory {self._output_directory} must be string.')
 
         os.makedirs(self._output_directory, exist_ok=True)
-        
