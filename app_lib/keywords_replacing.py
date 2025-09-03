@@ -1,4 +1,5 @@
-import re
+from app_lib.helpers.extract_href_value import extract_href_value
+from app_lib.helpers.replace_href import replace_href
 
 
 
@@ -20,23 +21,21 @@ class KeywordsReplacing:
             return self.html_body
         
         modified_html = self._html
-        # print(modified_html)
+
         for row in self.keywords:
             keyword, value = row[0], row[1]
 
-            if not keyword:
+            if not keyword or not value:
                 continue
+
+            new_href = extract_href_value(value)
             
-            # res = re.findall(rf"{keyword}", modified_html)
-            # print(res)
-            index = modified_html.find(keyword)
-            if index != -1:
-                print(f'find keyword: {keyword} . On position: {index} .')
+            if not new_href:
+                new_href = ''
+            
+            modified_html = replace_href(text=modified_html, key=keyword, new_href_value=new_href)
 
-
-
-        return []
-        # return self._modified_html_body
+        return modified_html
 
 
     @property

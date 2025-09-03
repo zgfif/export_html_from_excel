@@ -1,6 +1,9 @@
 import unittest
 from app_lib.helpers.extract_href_value import extract_href_value
 
+
+
+
 class TestExtractHrefValue(unittest.TestCase):
     def test_correct_extracting(self):
         text = '<a href="https://www.topeintl.com/en/bending-machine.html" >Bending Machine</a>'
@@ -18,13 +21,22 @@ class TestExtractHrefValue(unittest.TestCase):
 
     def test_when_no_href_attribute(self):
         text = '高温布'
-        expected = '高温布'
+        expected = None
 
         self.assertEqual(extract_href_value(text), expected)
 
 
-    def test_empty_string(self):
+    def test_when_empty_string(self):
         text = ''
-        expected = ''
+        expected = None
 
         self.assertEqual(extract_href_value(text), expected)
+
+    
+    def test_raise_error_when_text_argument_is_not_string(self):
+        text = 123123
+        
+        with self.assertRaises(ValueError) as cm:
+            extract_href_value(text)
+
+        self.assertIn(f'Argument {text!r} must be a string.', str(cm.exception))

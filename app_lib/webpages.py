@@ -1,5 +1,7 @@
 from app_lib.xlsx import Xlsx
 from app_lib.html import Html
+from app_lib.keywords_replacing import KeywordsReplacing
+from app_lib.keywords_pairs import KeywordsPairs
 import os
 
 
@@ -31,7 +33,13 @@ class Webpages:
         data = Xlsx(filepath=self._filepath).data_rows()
 
         for row in data:
-            Html(filepath=self._output_directory + '/' + row[0]).write(content=row[1])
+            html_filename = self._output_directory + '/' + row[0]
+            
+            keywords_pairs = KeywordsPairs().extract()
+            
+            content = KeywordsReplacing(html=row[1], keywords=keywords_pairs).perform()
+
+            Html(filepath=html_filename).write(content=content)
 
 
     
