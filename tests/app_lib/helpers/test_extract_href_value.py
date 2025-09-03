@@ -21,3 +21,10 @@ class TestExtractHrefValue(unittest.TestCase):
         expected = '高温布'
 
         self.assertEqual(extract_href_value(text), expected)
+
+
+    def test_empty_string(self):
+        text = ''
+        expected = ''
+
+        self.assertEqual(extract_href_value(text), expected)
