@@ -1,4 +1,4 @@
-# Excel to HTML Converter
+# Export html pages from excel
 
 This app extracts HTML code from an Excel sheet and creates corresponding HTML files.  
 It can also replace links extracted from another Excel file.
