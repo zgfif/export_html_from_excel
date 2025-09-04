@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 from openpyxl.workbook.workbook import Workbook
+import warnings
 
 
 class Xlsx:
@@ -18,17 +19,19 @@ class Xlsx:
         Args:
             filepath(str): path to XLSX file to be read.
         """
+        warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
+
         self._workbook = load_workbook(filepath, data_only=True)
 
 
     def column_names(self) -> list[str | None]:
         """
-        Return the list of column names (the first row of the file).
+        Return the tuple of column names (the first row of the file).
 
         Example:
             >>> x = Xlsx("webpage.xlsx")
             >>> x.column_names()
-            ['url|cn', 'html|cn']
+            ('url|cn', 'html|cn')
         """
 
         # select excel file sheet
@@ -37,7 +40,7 @@ class Xlsx:
         reader = sheet.iter_rows(values_only=True)
         row = next(reader, None) # this row contains column names
 
-        return [cell for cell in row if cell]  # remove empty column names and return the list of column names.
+        return tuple(cell for cell in row if cell)  # remove empty column names and return the list of column names.
 
 
     def data_rows(self) -> list[list[str | None]]:
@@ -61,7 +64,7 @@ class Xlsx:
         for row in reader:
             data.append(row)
         
-        return data
+        return tuple(data)
 
 
     @property

@@ -12,3 +12,6 @@ class TestKeywordsReplacing(unittest.TestCase):
         first_html = Xlsx(filepath='sources/webpage.xlsx').data_rows()[0][1]
 
         result = KeywordsReplacing(html=first_html, keywords=keyword_pairs).perform()
+
+        self.assertNotEqual(first_html, result)
+

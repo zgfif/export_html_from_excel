@@ -16,12 +16,12 @@ class Html:
         self._filepath = filepath
         
 
-    def write(self, content: str ='') -> None:
+    def write(self, content: str = '') -> None:
         """
         Write content to the HTML file.
 
         The file will be created or overwritten at the specified path.
-        Leading and trailing newline characters are removed before writing.
+        Leading and trailing whitespace characters are removed before writing.
 
         Args:
             content (str): The text content to write into the file. Defaults to an empty string.
@@ -30,13 +30,7 @@ class Html:
             ValueError: If content is not a string.
         """
         if not isinstance(content, str):
-            raise ValueError(f'Content for {self._filepath} have to be string.')
+            raise ValueError(f'Content for {self._filepath} must be a string.')
         
-        with open(file=self.filepath, mode='w', encoding='UTF-8') as f:
+        with open(self._filepath, 'w', encoding='UTF-8') as f:
             f.write(content.strip('\n'))
-
-    
-    @property
-    def filepath(self) -> str:
-        """Return the file path for the HTML file."""
-        return self._filepath

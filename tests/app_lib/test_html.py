@@ -55,7 +55,7 @@ class TestHtml(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             self.html.write(content=3333)
 
-        self.assertEqual(str(cm.exception), f'Content for {self.filepath} have to be string.')
+        self.assertEqual(str(cm.exception), f'Content for {self.filepath} must be a string.')
 
         self.assertFalse(os.path.exists(self.filepath))
 

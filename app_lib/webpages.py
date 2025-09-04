@@ -3,6 +3,7 @@ from app_lib.html import Html
 from app_lib.keywords_replacing import KeywordsReplacing
 from app_lib.keywords_pairs import KeywordsPairs
 import os
+from typing import Sequence
 
 
 
@@ -32,14 +33,14 @@ class Webpages:
 
         data = Xlsx(filepath=self._filepath).data_rows()
 
+        keywords_pairs = self._keywords_pairs()
+
         for row in data:
-            html_filename = self._output_directory + '/' + row[0]
-            
-            keywords_pairs = KeywordsPairs().extract()
-            
             content = KeywordsReplacing(html=row[1], keywords=keywords_pairs).perform()
 
-            Html(filepath=html_filename).write(content=content)
+            html_filepath = self._output_directory + '/' + row[0]
+
+            Html(filepath=html_filepath).write(content=content)
 
 
     
@@ -55,3 +56,15 @@ class Webpages:
             raise ValueError(f'Output directory {self._output_directory} must be string.')
 
         os.makedirs(self._output_directory, exist_ok=True)
+
+
+
+    def _keywords_pairs(self) -> Sequence[tuple[str, str]]:
+        """
+        Return the sequence of key, value pairs.
+
+        Example:
+            [(key1, value1), (key2, value2), ... (keyN, valueN),]
+        """
+        return KeywordsPairs().extract()
+

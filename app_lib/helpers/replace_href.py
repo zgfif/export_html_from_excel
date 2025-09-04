@@ -7,7 +7,7 @@ def replace_href(text: str, key: str, new_href_value: str) -> str:
 
     Args:
         text (str): text in which we find and replace href values.
-        key (str): this is  keyword. for replacing;
+        key (str): base filename (without '.html') to match in the href attribute;
         new_href_value (str): this is new value for found href.
     
     Example:
@@ -18,6 +18,6 @@ def replace_href(text: str, key: str, new_href_value: str) -> str:
         >>> '<a href="https://www.topeintl.com/cn/主页.html" class="w3-bar-item w3-button w3-mobile" style="padding:0 5% 0 10%" ><img src="../images/logo.png" style="width:100%; max-width:150px"/></a>'
     """
 
-    pattern = fr'href="{re.escape(key)}.html"'
-    result = re.sub(pattern, fr'href="{new_href_value}"', text)
+    pattern = 'href="' + re.escape(key) + '.html"'
+    result = re.sub(pattern, 'href="' + new_href_value + '"', text)
     return result
