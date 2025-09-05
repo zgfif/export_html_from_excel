@@ -17,7 +17,6 @@ def replace_href(text: str, key: str, new_href_value: str) -> str:
         >>> replace_href(text=text, key=key, new_href_value=new_href_value)
         >>> '<a href="https://www.topeintl.com/cn/主页.html" class="w3-bar-item w3-button w3-mobile" style="padding:0 5% 0 10%" ><img src="../images/logo.png" style="width:100%; max-width:150px"/></a>'
     """
+    pattern = fr'href="{re.escape(key)}\.html"'
+    return re.sub(pattern, f'href="{new_href_value}"', text)
 
-    pattern = 'href="' + re.escape(key) + '.html"'
-    result = re.sub(pattern, 'href="' + new_href_value + '"', text)
-    return result
