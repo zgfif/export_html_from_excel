@@ -1,6 +1,5 @@
-from app_lib.xlsx import Xlsx
+from app_lib.xlsx_file import XlsxFile
 from app_lib.helpers.group_elements_by_two import group_elements_by_two
-from typing import Sequence
 
 
 
@@ -18,17 +17,17 @@ class KeywordsPairs:
 
     
 
-    def extract(self) -> Sequence[tuple[str, str]]:
+    def extract(self) -> tuple[tuple[str | None], ...]:
         """
         Read XLSX file and return list of keyword, value pairs.
         """
         grouped_pairs = []
-        data = Xlsx(self._filepath).data_rows()
+
+        with XlsxFile(self._filepath) as xf:
+            data = xf.data_rows()
 
         for row in data:
             new_grouped_pairs = group_elements_by_two(row)
             grouped_pairs.extend(new_grouped_pairs)
         
         return tuple(grouped_pairs)
-
-        

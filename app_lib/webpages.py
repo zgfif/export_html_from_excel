@@ -1,9 +1,10 @@
-from app_lib.xlsx import Xlsx
-from app_lib.html import Html
+from app_lib.xlsx_file import XlsxFile
+from app_lib.html_file import HtmlFile
 from app_lib.keywords_replacing import KeywordsReplacing
 from app_lib.keywords_pairs import KeywordsPairs
+from app_lib.logger import Logger
 import os
-from typing import Sequence
+
 
 
 
@@ -23,24 +24,34 @@ class Webpages:
         """
         self._filepath = filepath
         self._output_directory = output_directory
+        self._logger = Logger(filepath='logs/app.log').setup()
 
     
+
     def generate(self) -> None:
         """
         Generate HTML files from the content of the XLSX file.
         """
         self._validate_output_directory()
 
-        data = Xlsx(filepath=self._filepath).data_rows()
-
+        with XlsxFile(filepath=self._filepath) as xf:
+            data = xf.data_rows()
+        
         keywords_pairs = self._keywords_pairs()
 
         for row in data:
-            content = KeywordsReplacing(html=row[1], keywords=keywords_pairs).perform()
+            
+            html_name, html_content = row[0], row[1]
+        
+            self._logger.info('Start processing \'%s\' ...', html_name)
+        
+            content = KeywordsReplacing(html=html_content, keywords=keywords_pairs).perform()
 
-            html_filepath = self._output_directory + '/' + row[0]
+            html_filepath = os.path.join(self._output_directory, html_name)
 
-            Html(filepath=html_filepath).write(content=content)
+            HtmlFile(filepath=html_filepath).write(content=content)
+
+        self._logger.info('Congratulations! We have finished processing!')
 
 
     
@@ -59,12 +70,11 @@ class Webpages:
 
 
 
-    def _keywords_pairs(self) -> Sequence[tuple[str, str]]:
+    def _keywords_pairs(self) -> tuple[tuple[str, str], ...]:
         """
         Return the sequence of key, value pairs.
 
         Example:
-            [(key1, value1), (key2, value2), ... (keyN, valueN),]
+            ((key1, value1), (key2, value2), ... (keyN, valueN))
         """
         return KeywordsPairs().extract()
-

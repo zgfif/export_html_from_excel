@@ -19,4 +19,3 @@ def replace_href(text: str, key: str, new_href_value: str) -> str:
     """
     pattern = fr'href="{re.escape(key)}\.html"'
     return re.sub(pattern, f'href="{new_href_value}"', text)
-

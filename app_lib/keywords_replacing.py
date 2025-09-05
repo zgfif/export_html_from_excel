@@ -1,6 +1,5 @@
 from app_lib.helpers.extract_href_value import extract_href_value
 from app_lib.helpers.replace_href import replace_href
-from typing import Sequence
 
 
 
@@ -10,7 +9,7 @@ class KeywordsReplacing:
     from 'sources/keywords.xlsx'.
     """
 
-    def __init__(self, html: str, keywords: Sequence[tuple[str, str]]) -> None:
+    def __init__(self, html: str, keywords: tuple[tuple[str, str], ...]) -> None:
         self._html = html # html code to perform replacing
         self._keywords = keywords # contains the list [(key1, value1), (key2, value2),...(keyN,valueN)]
 

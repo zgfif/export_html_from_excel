@@ -1,4 +1,4 @@
-class Html:
+class HtmlFile:
     """
     A helper class for creating and writing to an HTML file.
 

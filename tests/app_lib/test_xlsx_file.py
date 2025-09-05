@@ -1,22 +1,29 @@
 import unittest
-from app_lib.xlsx import Xlsx
+from app_lib.xlsx_file import XlsxFile
+
 
 
 
 class TestXlsx(unittest.TestCase):
     def test_retrieve_column_names(self):
-        column_names = Xlsx('sources/webpage.xlsx').column_names()
+        with XlsxFile('sources/webpage.xlsx') as xf:
+            column_names = xf.column_names()
 
         self.assertTupleEqual(column_names, ('url|cn', 'html|cn'), 'Incorrect column names')
 
 
+
     def test_retrieve_data_first_row_first_cell(self):
-        data_rows = Xlsx('sources/webpage.xlsx').data_rows()
+        with XlsxFile('sources/webpage.xlsx') as xf:
+            data_rows = xf.data_rows()
+
         self.assertEqual(data_rows[0][0], '1.html')
 
 
+
     def test_retrieve_all_data_rows(self):
-        data_rows = Xlsx('sources/keywords.xlsx').data_rows()
+        with XlsxFile('sources/keywords.xlsx') as xf:
+            data_rows = xf.data_rows()
 
         expected_row = (
             'Bending Machine', 

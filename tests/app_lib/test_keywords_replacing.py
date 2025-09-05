@@ -1,17 +1,18 @@
 import unittest
 from app_lib.keywords_replacing import KeywordsReplacing
 from app_lib.keywords_pairs import KeywordsPairs
-from app_lib.xlsx import Xlsx
+from app_lib.xlsx_file import XlsxFile
 
 
 
 class TestKeywordsReplacing(unittest.TestCase):
     def test_replacing_for_one_file(self):
+        
+        with XlsxFile(filepath='sources/webpage.xlsx') as xf:
+            html_content = xf.data_rows()[0][1]
+        
         keyword_pairs = KeywordsPairs().extract()
         
-        first_html = Xlsx(filepath='sources/webpage.xlsx').data_rows()[0][1]
+        result = KeywordsReplacing(html=html_content, keywords=keyword_pairs).perform()
 
-        result = KeywordsReplacing(html=first_html, keywords=keyword_pairs).perform()
-
-        self.assertNotEqual(first_html, result)
-
+        self.assertNotEqual(html_content, result)

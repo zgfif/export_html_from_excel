@@ -1,6 +1,6 @@
 import unittest
 import os
-from app_lib.html import Html
+from app_lib.html_file import HtmlFile
 
 
 
@@ -18,10 +18,10 @@ HTML_CONTENT = """
 """
 
 
-class TestHtml(unittest.TestCase):
+class TestHtmlFile(unittest.TestCase):
     def setUp(self):
         self.filepath = 'some.html'
-        self.html =Html(filepath=self.filepath)
+        self.html =HtmlFile(filepath=self.filepath)
 
 
     def tearDown(self):
@@ -58,4 +58,3 @@ class TestHtml(unittest.TestCase):
         self.assertEqual(str(cm.exception), f'Content for {self.filepath} must be a string.')
 
         self.assertFalse(os.path.exists(self.filepath))
-
