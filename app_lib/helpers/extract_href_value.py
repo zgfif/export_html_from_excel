@@ -1,5 +1,7 @@
 import re
 
+
+
 def extract_href_value(text: str) -> str | None:
     """
     Extract the value of the first href attribute from the given text.
@@ -14,9 +16,6 @@ def extract_href_value(text: str) -> str | None:
         >>> extract_href_value('<a href="https://example.com">Link</a>')
         'https://example.com'
     """
-    if not isinstance(text, str):
-        raise ValueError(f'Argument {text!r} must be a string.')
-
     if not text:
         return None
 
@@ -24,7 +23,4 @@ def extract_href_value(text: str) -> str | None:
 
     result = re.search(pattern, text)
 
-    if result:
-        return result.group(1)
-
-    return None
+    return result.group(1) if result else None

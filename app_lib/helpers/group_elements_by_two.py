@@ -1,17 +1,13 @@
-def group_elements_by_two(lst: list) -> list[tuple[str, str]]:
+def group_elements_by_two(items: tuple[str, ...]) -> tuple[tuple[str, str], ...]:
     """
-    Receives a list like: ['abc', 'cde', 'fhi', 'jkl', 'lmn', 'opq'] and
-    returns a new list with paired elements [('abc', 'cde'), ('fhi', 'jkl'), ('lmn', 'opq')].
-    The input list must have an even number of elements.
+    Receives a tuple like: ('abc', 'cde', 'fhi', 'jkl', 'lmn', 'opq') and
+    returns a new tuple with paired elements (('abc', 'cde'), ('fhi', 'jkl'), ('lmn', 'opq')).
+    The input tuple must have an even number of elements.
     Raises:
-        ValueError: If the length of the list is odd.
+        ValueError: If the length of the tuple is odd.
     """
-    paired_lst = []
 
-    if len(lst) % 2 != 0:
-        raise ValueError('The list must have an even count of elements.')
+    if len(items) % 2 != 0:
+        raise ValueError(f"Expected even number of elements, got {len(items)}")
 
-    for i in range(0, len(lst), 2):
-        paired_lst.append((lst[i], lst[i+1]))
-    
-    return paired_lst
+    return tuple(zip(items[::2], items[1::2]))

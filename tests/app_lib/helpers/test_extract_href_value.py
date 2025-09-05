@@ -31,12 +31,3 @@ class TestExtractHrefValue(unittest.TestCase):
         expected = None
 
         self.assertEqual(extract_href_value(text), expected)
-
-    
-    def test_raise_error_when_text_argument_is_not_string(self):
-        text = 123123
-        
-        with self.assertRaises(ValueError) as cm:
-            extract_href_value(text)
-
-        self.assertIn(f'Argument {text!r} must be a string.', str(cm.exception))
